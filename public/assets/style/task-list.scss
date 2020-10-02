@@ -1,0 +1,48 @@
+.task-list {
+  padding: 30px 15px;
+  border: 1px solid grey;
+  border-radius: 15px;
+
+  width: 500px;
+
+  thead {
+    td {
+      border-bottom: 1px solid gray;
+      border-collapse: collapse;
+      text-align: center;
+    }
+  }
+  tbody {
+    color: rgb(50, 35, 35);
+    td {
+      border-bottom: 1px dashed gray;
+      height: 40px;
+    }
+    .actions {
+      text-align: center;
+      .action-btn {
+        display: inline-block;
+        margin: 1px 2px;
+        padding: 1px 2px;
+        border: 1px solid gray;
+        border-radius: 10%;
+        color: white;
+        cursor: pointer;
+        width: auto;
+        &.delete {
+          border-color: rgb(237, 107, 107);
+          background-color: rgb(210, 130, 130);
+
+        }
+        &.edit {
+          border-color: rgb(160, 173, 213);
+          background-color: rgb(160, 173, 213);
+        }
+        &.complete {
+          border-color: rgb(160, 213, 164);
+          background-color: rgb(160, 213, 164);
+        }
+      }
+    }
+  }
+}

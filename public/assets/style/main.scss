@@ -1,0 +1,18 @@
+@import './add-task.scss';
+@import './task-filter.scss';
+@import './task-list.scss';
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+.container {
+  position: relative;
+  max-width: 500px;
+  min-width: 100px;
+  margin: 50px auto;
+  box-shadow: 0 2px 15px 1px grey;
+  border-radius: 10px;
+  padding: 50px;
+}

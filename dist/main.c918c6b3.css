@@ -1,0 +1,118 @@
+.add-task {
+  width: 400px;
+  margin: 0 auto 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.add-task input {
+  width: 320px;
+  outline: none;
+  border: 1px solid gray;
+  border-radius: 5px;
+  height: 40px;
+  font-size: 18px;
+}
+.add-task div {
+  display: inline-flex;
+  border-radius: 50%;
+  background-color: #a0add5;
+  width: 50px;
+  height: 50px;
+  margin-left: 20px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.add-task div::after, .add-task div::before {
+  content: "";
+  border: 1px solid white;
+  position: absolute;
+  width: 30px;
+}
+.add-task div::after {
+  transform: rotate(90deg);
+}
+
+.task-filter {
+  font-size: 16px;
+}
+.task-filter .search {
+  display: inline-block;
+}
+.task-filter .filter {
+  display: inline-block;
+  float: right;
+}
+.task-filter .filter span {
+  cursor: pointer;
+  margin: 0 5px;
+  color: gray;
+}
+.task-filter .filter span.active {
+  color: black;
+}
+
+.task-list {
+  padding: 30px 15px;
+  border: 1px solid grey;
+  border-radius: 15px;
+  width: 500px;
+}
+.task-list thead td {
+  border-bottom: 1px solid gray;
+  border-collapse: collapse;
+  text-align: center;
+}
+.task-list tbody {
+  color: #322323;
+}
+.task-list tbody td {
+  border-bottom: 1px dashed gray;
+  height: 40px;
+}
+.task-list tbody .actions {
+  text-align: center;
+}
+.task-list tbody .actions .action-btn {
+  display: inline-block;
+  margin: 1px 2px;
+  padding: 1px 2px;
+  border: 1px solid gray;
+  border-radius: 10%;
+  color: white;
+  cursor: pointer;
+  width: auto;
+}
+.task-list tbody .actions .action-btn.delete {
+  border-color: #ed6b6b;
+  background-color: #d28282;
+}
+.task-list tbody .actions .action-btn.edit {
+  border-color: #a0add5;
+  background-color: #a0add5;
+}
+.task-list tbody .actions .action-btn.complete {
+  border-color: #a0d5a4;
+  background-color: #a0d5a4;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+
+.container {
+  position: relative;
+  max-width: 500px;
+  min-width: 100px;
+  margin: 50px auto;
+  box-shadow: 0 2px 15px 1px grey;
+  border-radius: 10px;
+  padding: 50px;
+}
+
+/*# sourceMappingURL=/main.c918c6b3.css.map */

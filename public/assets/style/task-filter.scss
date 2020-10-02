@@ -1,0 +1,18 @@
+.task-filter {
+  font-size: 16px;
+  .search {
+    display: inline-block;
+  }
+  .filter {
+    display: inline-block;
+    float: right;
+    span {
+      cursor: pointer;
+      margin: 0 5px;
+      color: gray;
+      &.active {
+        color: black;
+      }
+    }
+  }
+}
