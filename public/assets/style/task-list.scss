@@ -18,6 +18,22 @@
       border-bottom: 1px dashed gray;
       height: 40px;
     }
+    .tasks {
+      input {
+        height: 40px;
+        font-size: 20px;
+        border: none;
+        border-bottom: 1px solid gray;
+        color: #9faed5;
+        outline: none;
+      }
+      span {
+        &.done {
+          text-decoration: line-through;
+          color: #bfbfbf
+        }
+      }
+    }
     .actions {
       text-align: center;
       .action-btn {
@@ -29,6 +45,9 @@
         color: white;
         cursor: pointer;
         width: auto;
+        &.done {
+          background-color: #9faed5;
+        }
         &.delete {
           border-color: rgb(237, 107, 107);
           background-color: rgb(210, 130, 130);
@@ -41,6 +60,20 @@
         &.complete {
           border-color: rgb(160, 213, 164);
           background-color: rgb(160, 213, 164);
+        }
+      }
+    }
+  }
+  tfoot {
+    .filter {
+      margin-top: 20px;
+      font-size: 16px;
+      span {
+        cursor: pointer;
+        margin: 0 5px;
+        color: gray;
+        &.active {
+          color: black;
         }
       }
     }

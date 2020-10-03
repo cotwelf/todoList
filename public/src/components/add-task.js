@@ -7,29 +7,37 @@ const mapStateToProps = state => {
     addTaskValue: state.addTaskValue
   }
 }
+const mapDispatchToProps = dispatch => {
+  return {
+    editingAddValue(e){
+      const changeAddValue = {
+        type: 'CHANGE_ADD_VALUE',
+        addTaskValue: e.target.value
+      }
+      dispatch(changeAddValue)
+    },
+    addTaskAction(){
+      const postTask = {
+        type: 'ADD_TASK',
+      }
+      store.dispatch(postTask)
+    }
+  }
+}
 const AddTask = (props) => {
   const addInputRef = useRef()
-  const editingAddValue = () => {
-    const changeAddValue = {
-      type: 'CHANGE_ADD_VALUE',
-      addTaskValue: addInputRef.current.value
-    }
-    store.dispatch(changeAddValue)
-  }
-  const addTaskAction = () => {
-
-    const postTask = {
-      type: 'ADD_TASK',
-      addTaskValue: props.addTaskValue
-    }
-    store.dispatch(postTask)
-  }
   return (
     <div className='add-task'>
-      <input className='name' onChange={editingAddValue} value={props.addTaskValue} ref={addInputRef}/>
-      <div onClick={addTaskAction}></div>
+      <input
+        className='name'
+        placeholder='请输入任务，点击右侧 ‘+’ 添加'
+        onChange={props.editingAddValue}
+        value={props.addTaskValue}
+        ref={addInputRef}
+      />
+      <div onClick={props.addTaskAction}></div>
     </div>
   )
 }
 
-export default connect(mapStateToProps,null)(AddTask)
+export default connect(mapStateToProps,mapDispatchToProps)(AddTask)

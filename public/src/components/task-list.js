@@ -1,24 +1,77 @@
 import React from 'react'
-import store from '../store'
+import store from 'react-redux'
 import {connect} from 'react-redux'
+import classNames from 'classname'
 
 const mapStateToProps = state => {
-  console.log('22223333',state)
   return {
-    list: state.list,
-    editing: state.editing
+    todoList: Object.assign([],state.list).filter(item=>item.status === 0),
+    doneList: Object.assign([],state.list).filter(item=>item.status === 1),
+    editId: state.editId,
+    editValue: state.editValue,
+    listFilter: state.listFilter
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    editTask(id,name){
+      const action = {
+        type: 'EDITING',
+        editValue: name ? name : window.event.target.value,
+        editId: id
+      }
+      dispatch(action)
+    },
+    complete() {
+      const action = {
+        type: 'EDITED',
+      }
+      dispatch(action)
+    },
+    done(id) {
+      const action = {
+        type: 'DONE',
+        id
+      }
+      dispatch(action)
+    },
+    delete(id) {
+      const action = {
+        type: 'DELETE',
+        id
+      }
+      dispatch(action)
+    },
+    filter(filters) {
+      const action = {
+        type: 'FILTER',
+        filters
+      }
+      dispatch(action)
+    }
   }
 }
 const List = (props) => {
-  const editTask = (index=0) => {
-    console.log('2333')
-
+  let showList = null
+  switch (props.listFilter) {
+    case 'total':{
+      showList = props.todoList.concat(props.doneList)
+      break;
+    }
+    case 'todo': {
+      showList = props.todoList
+      break;
+    }
+    case 'done': {
+      showList = props.doneList
+      break
+    }
   }
-  const complete = (index) => {
-    console.log(index)
+  if(!showList.length) {
+    return null
   }
   return (
-    <table className='task-list' cellspacing='0'>
+    <table className='task-list' cellSpacing='0'>
       <thead>
         <tr>
           <td>
@@ -28,30 +81,48 @@ const List = (props) => {
         </tr>
       </thead>
       <tbody>
-        {props.list.map((item,index)=>(
+        {showList.map((item,index)=>(
           <tr key={index}>
-            <td>
+            <td className='tasks' onClick={()=>{item.status === 0 && props.editTask(item.id,item.name)}}>
               {
-                props.editing
-                ? <input defaultValue={item.name}/>
-                : <span>{item.name}</span>
+                (props.editId == item.id)
+                ? <input
+                    defaultValue={item.name}
+                    onChange={() => props.editTask(item.id)}
+                    onFocus={() => props.editTask(item.id)}
+                    onBlur={() => props.complete(item.id)}
+                    onKeyDown={() => props.complete(item.id)}
+                  />
+                : <span className={item.status === 0 ? 'doing' : 'done'} >{item.name}</span>
               }
             </td>
             <td className='actions'>
-              {
-                props.editing
-                  ? <div className='action-btn done' onClick={() => complete(index)}>确认</div>
-                  : <div className='action-btn edit' onClick={() => editTask(index)}>编辑</div>
+              { item.status === 0 &&
+                (props.editId == item.id
+                  ? <div className='action-btn done' onClick={() => props.complete(item.id)}>确认</div>
+                  : <div className='action-btn edit' onClick={() => props.editTask(item.id,item.name)}>编辑</div>)
               }
-              <div className='action-btn complete'>完成</div>
-              <div className='action-btn delete'>删除</div>
+              {item.status === 0 && <div className='action-btn complete' onClick={()=> props.done(item.id)}>完成</div>}
+              <div className='action-btn delete' onClick={() => props.delete(item.id)}>删除</div>
             </td>
           </tr>
         ))}
-
-    </tbody>
-  </table>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>
+            <input />
+            <span className='serch'>🔎</span>
+          </td>
+          <td className='filter'>
+            <span className={classNames({'active': props.listFilter === 'total'})} onClick={()=>{props.filter('total')}}>全部</span>
+            <span className={classNames({'active': props.listFilter === 'done'})} onClick={()=>{props.filter('done')}}>已完成</span>
+            <span className={classNames({'active': props.listFilter === 'todo'})} onClick={()=>{props.filter('todo')}}>未完成</span>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
   )
 }
 
-export default connect(mapStateToProps,null)(List)
+export default connect(mapStateToProps,mapDispatchToProps)(List)

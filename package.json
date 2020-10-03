@@ -21,6 +21,8 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "babel-preset-es2017-node7": "^0.5.2",
+    "classname": "0.0.0",
+    "classnames": "^2.2.6",
     "re": "^0.1.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
