@@ -1,6 +1,12 @@
+$done-color:#afcdcb;
+$delete-color: #6396a2;
+$edit-color: #d3d1de;
+
 @import './add-task.scss';
 @import './task-filter.scss';
 @import './task-list.scss';
+
+
 html,
 body {
   margin: 0;

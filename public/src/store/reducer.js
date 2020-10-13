@@ -34,19 +34,13 @@ export default (state = defaultState, action) => {
           status: 0
         })
       }
-      return Object.assign(
-        {},state,
-        {
-          list: taskList,
-          addTaskValue:''
-        }
-      )
+      return {...state,list: taskList,addTaskValue:'' }
     }
     case 'CHANGE_ADD_VALUE': {
-      return Object.assign({},state,{addTaskValue:action.addTaskValue})
+      return {...state,addTaskValue:action.addTaskValue}
     }
     case 'EDITING': {
-      return Object.assign({},state,{editValue: action.editValue,editId: action.editId})
+      return {...state,editValue: action.editValue,editId: action.editId}
     }
     case 'EDITED': {
       let newList = state.list
@@ -54,8 +48,8 @@ export default (state = defaultState, action) => {
         if(item.id === state.editId) {
           item.name = state.editValue
         }
-      });
-      return Object.assign({},state,{editId: null, editValue:'', list: newList})
+      })
+      return {...state, editId: null}
     }
     case 'DONE': {
       let newList = state.list
@@ -64,7 +58,7 @@ export default (state = defaultState, action) => {
           item.status = 1
         }
       });
-      return Object.assign({},state,{list: newList, editId: null})
+      return {...state,list: newList, editId: null}
     }
     case 'DELETE': {
       let newList = state.list
@@ -73,10 +67,10 @@ export default (state = defaultState, action) => {
           newList.splice(index,1)
         }
       })
-      return Object.assign({}, state, {list: newList})
+      return {...state, list: newList}
     }
     case 'FILTER': {
-      return Object.assign({}, state, {listFilter: action.filters})
+      return {...state, listFilter: action.filters}
     }
   }
   return state

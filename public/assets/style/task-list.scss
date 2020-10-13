@@ -40,26 +40,19 @@
         display: inline-block;
         margin: 1px 2px;
         padding: 1px 2px;
-        border: 1px solid gray;
         border-radius: 10%;
         color: white;
         cursor: pointer;
         width: auto;
-        &.done {
-          background-color: #9faed5;
+        &.complete {
+          background-color: $done-color;
         }
         &.delete {
-          border-color: rgb(237, 107, 107);
-          background-color: rgb(210, 130, 130);
-
+          background-color: $delete-color;
         }
-        &.edit {
-          border-color: rgb(160, 173, 213);
-          background-color: rgb(160, 173, 213);
-        }
-        &.complete {
-          border-color: rgb(160, 213, 164);
-          background-color: rgb(160, 213, 164);
+        &.edit,
+        &.done {
+          background-color: $edit-color;
         }
       }
     }

@@ -1,10 +1,11 @@
-import React from 'react'
+import React,{useRef, createRef} from 'react'
 import store from 'react-redux'
 import {connect} from 'react-redux'
 import classNames from 'classname'
 
 const mapStateToProps = state => {
   return {
+    list: state.list,
     todoList: Object.assign([],state.list).filter(item=>item.status === 0),
     doneList: Object.assign([],state.list).filter(item=>item.status === 1),
     editId: state.editId,
@@ -41,6 +42,7 @@ const mapDispatchToProps = dispatch => {
         id
       }
       dispatch(action)
+      console.log(List.searchRef)
     },
     filter(filters) {
       const action = {
@@ -52,6 +54,8 @@ const mapDispatchToProps = dispatch => {
   }
 }
 const List = (props) => {
+  const searchRef = createRef(null)
+  console.log(searchRef)
   let showList = null
   switch (props.listFilter) {
     case 'total':{
@@ -67,7 +71,7 @@ const List = (props) => {
       break
     }
   }
-  if(!showList.length) {
+  if(!props.list.length) {
     return null
   }
   return (
@@ -111,7 +115,7 @@ const List = (props) => {
       <tfoot>
         <tr>
           <td>
-            <input />
+            <input ref={searchRef}/>
             <span className='serch'>🔎</span>
           </td>
           <td className='filter'>
