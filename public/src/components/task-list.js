@@ -42,7 +42,6 @@ const mapDispatchToProps = dispatch => {
         id
       }
       dispatch(action)
-      console.log(List.searchRef)
     },
     filter(filters) {
       const action = {
@@ -50,13 +49,23 @@ const mapDispatchToProps = dispatch => {
         filters
       }
       dispatch(action)
+    },
+    search(keyWords) {
+      const action = {
+        type: 'SEARCH',
+        keyWords
+      }
+      dispatch(action)
     }
   }
 }
 const List = (props) => {
   const searchRef = createRef(null)
-  console.log(searchRef)
+
   let showList = null
+  const search = () => {
+    props.search(searchRef.current.value)
+  }
   switch (props.listFilter) {
     case 'total':{
       showList = props.todoList.concat(props.doneList)
@@ -116,7 +125,7 @@ const List = (props) => {
         <tr>
           <td>
             <input ref={searchRef}/>
-            <span className='serch'>🔎</span>
+            <span className='search' onClick={search}>🔎</span>
           </td>
           <td className='filter'>
             <span className={classNames({'active': props.listFilter === 'total'})} onClick={()=>{props.filter('total')}}>全部</span>

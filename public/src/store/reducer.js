@@ -72,6 +72,15 @@ export default (state = defaultState, action) => {
     case 'FILTER': {
       return {...state, listFilter: action.filters}
     }
+    case 'SEARCH': {
+      let list = state.list
+      if (action.keyWords) {
+        list = state.list.filter(item=>{
+          return item.name.match(action.keyWords)
+        })
+      }
+      return {...state,list}
+    }
   }
   return state
 }
